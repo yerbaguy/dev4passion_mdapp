@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+
+
 import 'dart:io';
 import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:dev4passion_mdapp_patient/screens/authenticate/home.dart';
+import 'package:dev4passion_mdapp_patient/screens/authenticate/signin.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = new GoogleSignIn();
 
 
-class Signinanon extends StatefulWidget {
-  const Signinanon({ Key? key }) : super(key: key);
+
+class Home extends StatefulWidget {
+  const Home({ Key? key }) : super(key: key);
 
   @override
-  _SigninanonState createState() => _SigninanonState();
+  _HomeState createState() => _HomeState();
 }
 
-class _SigninanonState extends State<Signinanon> {
+class _HomeState extends State<Home> {
 
   String status = "";
 
@@ -25,7 +30,7 @@ class _SigninanonState extends State<Signinanon> {
     status = "Not authenticated";
   }
 
-  void signInAnon() async {
+   void signInAnon() async {
     User? user = (await auth.signInAnonymously()).user;
      if (user!= null && user.isAnonymous == true) {
         setState((){
@@ -37,10 +42,20 @@ class _SigninanonState extends State<Signinanon> {
   }
 
   void signOut() async {
-    await auth.signOut();
-    setState((){
-        status = "Signed Out";
-    });
+      await auth.signOut();
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Signin()));
+    //User? user = await auth.signOut();
+
+   // print(user);
+
+
+    // if(user!=null && user.signOut == true) {
+   
+    // setState((){
+    //     status = "Signed Out";
+    // });
+   
+    //}
   }
 
 
@@ -49,6 +64,7 @@ class _SigninanonState extends State<Signinanon> {
     // return Container(
       
     // );
+
 
     return Scaffold(
       // drawer: Sidemenu(),
@@ -61,12 +77,15 @@ class _SigninanonState extends State<Signinanon> {
         backgroundColor: Colors.pinkAccent,
         
         actions: <Widget>[
-            TextButton(onPressed:
+            TextButton(onPressed: 
             (){
+                // signInAnon();
+                signOut();
+                
 
                 print("register");
             },
-            child: Text("Register"),
+            child: Text("Anonymous Signout"),
             ),
         ],
       ),
@@ -82,9 +101,14 @@ class _SigninanonState extends State<Signinanon> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
 
-                            MaterialButton( onPressed: signOut, child: Text('Sign Out')),
+                            //ok
+                            // MaterialButton( onPressed: signOut, child: Text('Sign Out')),
 
-                            MaterialButton( onPressed: signInAnon, child: Text('Sign In Anon')),
+                            // MaterialButton( onPressed: signInAnon, child: Text('Sign In Anon')),
+                            //ok
+                         
+                         
+                         
                            // MaterialButton( onPressed: signinanon, child: Text('Sign In Anoon'),),
 
              

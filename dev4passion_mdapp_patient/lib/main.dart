@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:dev4passion_mdapp_patient/screens/authenticate/signinanon.dart';
+// import 'package:dev4passion_mdapp_patient/screens/authenticate/signinanon.dart';
+import 'package:dev4passion_mdapp_patient/screens/authenticate/signin.dart';
+import 'package:dev4passion_mdapp_patient/screens/signup.dart';
+import 'package:dev4passion_mdapp_patient/screens/authenticate/home.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -32,7 +35,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        home: Signinanon(),
+      
+       ////  home: Signinanon(),
+        home: Signin(),
+        debugShowCheckedModeBanner: false,
+        routes: <String, WidgetBuilder>{
+          '/signup':(BuildContext context) => new Signup(),
+          '/home':(BuildContext context) => new Home()
+        },
     );
   }
 }
