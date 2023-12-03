@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dev4passion_mdapp_doctor/screens/signup/signup.dart';
+import 'package:dev4passion_mdapp_doctor/screens/signin/signin.dart';
 
 
-void main() {
+// void main() {
+//   runApp(const MyApp());
+// }
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -26,7 +35,14 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Signin(),
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+          '/signup':(BuildContext context) => new Signup(),
+          // '/home':(BuildContext context) => new Home()
+
+      },
     );
   }
 }
