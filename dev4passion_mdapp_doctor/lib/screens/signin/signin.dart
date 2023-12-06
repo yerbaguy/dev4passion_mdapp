@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dev4passion_mdapp_doctor/screens/home/home.dart';
+import 'package:dev4passion_mdapp_doctor/screens/signin/signin.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = new GoogleSignIn();
 
 
 class Signin extends StatefulWidget {
@@ -20,6 +29,26 @@ class _SigninState extends State<Signin> {
 
     status = "Not authenticated";
   }
+
+
+   void _signIn() async {
+    // final User user = ( await _auth.signInWithEmailAndPassword(email: _emailController, password: _passwordController)).user;
+        final User? user = ( await auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text.toString())).user;
+        print(_emailController.text);
+        print(_passwordController.text);
+        
+
+    if (user != null) {
+      //  Navigator.of(context).pushNamed('/home');
+     
+      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+    }
+  }
+
+
+
+
+
 
 
   @override
@@ -142,6 +171,13 @@ class _SigninState extends State<Signin> {
                                     alignment: Alignment(1,0),
                                     padding: EdgeInsets.only(top:15, left:20),
                                     child: InkWell(
+                                      child: GestureDetector (
+                                        onTap: (){
+
+                                            print("lakjsdfl");
+                                            Navigator.of(context).pushNamed('/forgotpassword');
+
+                                        },
                                         child: Text(
                                             'Forgot Password',
                                             style: TextStyle(
@@ -151,6 +187,7 @@ class _SigninState extends State<Signin> {
                                                 decoration: TextDecoration.underline,
                                             ),
                                         ),
+                                      ),
 
                                     ),
                                  ),
@@ -165,7 +202,7 @@ class _SigninState extends State<Signin> {
                                         elevation: 7,
                                         child: GestureDetector(
                                             onTap: (){
-                                               // _signIn();
+                                                _signIn();
                                             },
                                             child: Center(
                                                 child: Text(

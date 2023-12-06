@@ -1,57 +1,37 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// import 'package:email_validator/email_validator.dart';
+
+// import 'package:firebase_auth_forgot_password/utils.dart';
+
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-
-
-class Signup extends StatefulWidget {
-  const Signup({ Key? key }) : super(key: key);
+class Forgotpassword extends StatefulWidget {
+  const Forgotpassword({ Key? key }) : super(key: key);
 
   @override
-  _SignupState createState() => _SignupState();
+  _ForgotpasswordState createState() => _ForgotpasswordState();
 }
 
-class _SignupState extends State<Signup> {
+class _ForgotpasswordState extends State<Forgotpassword> {
 
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
     late bool _success;
     late String? _userEmail;
 
-     void _register() async {
-                final User? user = (await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text)).user;
-                print(_emailController.text);
-                print(_passwordController.text);
-
-                if ( user != null) {
-                    setState(() {
-                        _success = true;
-                        _userEmail = user.email;
-                    });
-
-                } else {
-                    _success = false;
-                }
-
-    //              if (user != null) {
-    //         setState(() {
-    //             _success = true;
-    //             _userEmail = user.email
-    //         }};
-    // } else {
-    //     setState(() {
-    //         _success = false;
-    //     }};
-        
+    Future resetPassword() async {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.toString());
     }
+
+
 
   @override
   Widget build(BuildContext context) {
     
-     return new Scaffold(
+    return new Scaffold(
         // body: Column(
         //     crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -62,7 +42,7 @@ class _SignupState extends State<Signup> {
             children: <Widget>[
                 Container(
                     padding: EdgeInsets.fromLTRB(15,110,0,0),
-                        child: Text("SignUp",
+                        child: Text("Reset password",
                         style: TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold
                         )),
@@ -137,11 +117,17 @@ class _SignupState extends State<Signup> {
                                         child: GestureDetector(
                                             onTap: (){
 
-                                                _register();
+                                               // _register();
+                                               print(_emailController.text.toString());
+
+                                               //FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.toString());
+                                                resetPassword();
+
+                                              //print("ttttttt");
                                             },
                                             child: Center(
                                                 child: Text(
-                                                    'Register',
+                                                    'Reset password',
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontWeight: FontWeight.bold,
@@ -196,34 +182,8 @@ class _SignupState extends State<Signup> {
     );
     
     
-    
     // return Container(
       
     // );
   }
 }
-
-
-
-
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-
-
-
-// class Signup extends StatefulWidget {
-//   const Signup({ Key? key }) : super(key: key);
-
-//   @override
-//   _SignupState createState() => _SignupState();
-// }
-
-// class _SignupState extends State<Signup> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-      
-//     );
-//   }
-// }
