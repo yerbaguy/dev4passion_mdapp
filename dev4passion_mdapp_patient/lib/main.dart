@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:dev4passion_mdapp_patient/screens/authenticate/signin.dart';
 import 'package:dev4passion_mdapp_patient/screens/signup.dart';
 import 'package:dev4passion_mdapp_patient/screens/authenticate/home.dart';
+import 'package:dev4passion_mdapp_patient/screens/forgotpassword/forgotpassword.dart';
+import 'package:dev4passion_mdapp_patient/screens/askadoctor/askadoctor.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -41,7 +43,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           '/signup':(BuildContext context) => new Signup(),
-          '/home':(BuildContext context) => new Home()
+          '/home':(BuildContext context) => new Home(),
+          '/forgotpassword': (BuildContext context) => Forgotpassword(),
+          '/askadoctor': (BuildContext context) => Askadoctor()
         },
     );
   }

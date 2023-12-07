@@ -188,6 +188,19 @@ class _SigninState extends State<Signin> {
                                     alignment: Alignment(1,0),
                                     padding: EdgeInsets.only(top:15, left:20),
                                     child: InkWell(
+
+                                         child: GestureDetector (
+                                        onTap: (){
+
+                                            print("lakjsdfl");
+                                            Navigator.of(context).pushNamed('/forgotpassword');
+
+                                        },
+
+
+
+
+
                                         child: Text(
                                             'Forgot Password',
                                             style: TextStyle(
@@ -198,6 +211,7 @@ class _SigninState extends State<Signin> {
                                             ),
                                         ),
 
+                                    ),
                                     ),
                                  ),
 

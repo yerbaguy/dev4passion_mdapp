@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:dev4passion_mdapp_patient/screens/authenticate/home.dart';
 import 'package:dev4passion_mdapp_patient/screens/authenticate/signin.dart';
+import 'package:dev4passion_mdapp_patient/screens/askadoctor/askadoctor.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = new GoogleSignIn();
@@ -122,6 +123,43 @@ class _HomeState extends State<Home> {
                             ////
                         ],
                     ),
+
+                    Container(
+                        padding: EdgeInsets.fromLTRB(15,18,0,0),
+                        child: Text("Hello",
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.bold
+                        )),
+                    ),
+
+                     SizedBox(height: 40,),
+                                 Container(
+                                    height: 40,
+                                    child: Material(
+                                        borderRadius: BorderRadius.circular(20),
+                                        shadowColor: Colors.greenAccent,
+                                        color: Colors.black,
+                                        elevation: 7,
+                                        child: GestureDetector(
+                                            onTap: (){
+                                               // _signIn();
+                                            Navigator.of(context).pushNamed('/askadoctor');
+
+                                            },
+                                            child: Center(
+                                                child: Text(
+                                                    'Ask a doctor',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: 'Montserrat',
+                                                    ),
+                                                ),
+                                            ),
+
+                                        ),
+                                    ),
+                                 ),
 
                 ],
             ),
