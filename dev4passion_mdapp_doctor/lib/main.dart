@@ -5,6 +5,7 @@ import 'package:dev4passion_mdapp_doctor/screens/signup/signup.dart';
 import 'package:dev4passion_mdapp_doctor/screens/signin/signin.dart';
 import 'package:dev4passion_mdapp_doctor/screens/forgotpassword/forgotpassword.dart';
 import 'package:dev4passion_mdapp_doctor/screens/home/home.dart';
+import 'package:dev4passion_mdapp_doctor/screens/specialisation/specialisation.dart';
 
 
 
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
           '/signup':(BuildContext context) => new Signup(),
           '/forgotpassword': (BuildContext context) => new Forgotpassword(),
-          '/home': (BuildContext context) => new Home()
+          '/home': (BuildContext context) => new Home(),
+          '/specialisation': (BuildContext context) => new Specialisation()
           // '/home':(BuildContext context) => new Home()
 
       },

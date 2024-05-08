@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:dev4passion_mdapp_patient/screens/authenticate/home.dart';
 import 'package:dev4passion_mdapp_doctor/screens/signin/signin.dart';
+import 'package:dev4passion_mdapp_doctor/screens/specialisation/specialisation.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = new GoogleSignIn();
@@ -44,6 +45,10 @@ class _HomeState extends State<Home> {
     //}
   }
 
+  void specialization() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> Specialisation()));
+  }
+
 
 
   @override
@@ -70,6 +75,19 @@ class _HomeState extends State<Home> {
                 print("register");
             },
             child: Text("Anonymous Signout"),
+            ),
+
+             TextButton(onPressed: 
+            (){
+                // signInAnon();
+               
+                // signOut();
+                specialization();
+                
+
+                print("specialization");
+            },
+            child: Text("Specialization"),
             ),
         ],
       ),

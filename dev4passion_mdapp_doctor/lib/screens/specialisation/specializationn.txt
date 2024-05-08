@@ -1,0 +1,360 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+
+class Specialization extends StatefulWidget {
+  const Specialization({ Key? key }) : super(key: key);
+
+    // final TextEditingController _emailController = TextEditingController();
+    // final TextEditingController _passwordController = TextEditingController();
+
+
+  @override
+  _SpecializationState createState() => _SpecializationState();
+}
+
+
+final databaseReference = FirebaseDatabase.instance.ref("specialisations");
+
+class _SpecializationState extends State<Specialization> {
+
+    CollectionReference specialisations = FirebaseFirestore.instance.collection('specialisations');
+
+
+    final TextEditingController _specialisationController = TextEditingController();
+    final TextEditingController _key_wordsController = TextEditingController();
+    String currentuser = "";
+    String currentUser = "";
+
+
+//   String getcurrent() {
+//       var current = getCurrentUser();
+
+//       return current;
+//   }
+
+////ok
+//    String getcurrent() {
+//        final curr = "lkajsdkf";
+//        return curr;
+//    }
+//////
+
+   // String? getcurrent() {
+      String getcurrent() { //here
+      
+       final curr = "lklkasjdlkfjasldkfjlkasdflkasdlkfjalksdfjlkj"; //ok
+     //  final curr = getcurrentUser();
+     // final curr = getcurrentUser();
+
+
+
+     ////  print(curr);
+       return curr;
+   }
+
+     Future<String?> getCurrentUser1() async {
+        String currentuser = "";
+
+        User? currentUser = await FirebaseAuth.instance.currentUser;
+
+        return currentUser?.email;
+     }
+
+
+    // Future<void> getcurrentUser() async { ok
+    // Future<String?> getcurrentUser() async { // here
+       Future<String?> getcurrentUser() async {
+    // Future<String?> getCurrentUser() async {
+    
+    ////Future<String?> getCurrentUser() async {
+        
+        String? currentuser = "";
+
+        User? currentUser = await FirebaseAuth.instance.currentUser;
+        // print("current");
+        // print(currentUser?.uid);
+        print("current");
+        print(currentUser?.email);
+       // _emailController = currentUser?.email;
+       // return currentUser?.email;
+
+
+        //   currentuser = currentUser?.email.toString();
+           return currentuser;
+    }
+
+////doesn't fail
+//   Future getCurrentUser() async {
+//     String currentuser = "Me";
+//     //var current = "Me";
+
+//     currentUser = currentuser;
+//     print(currentUser);
+
+//     // _emailController = currentuser;
+//     // print(_emailController);
+
+//     return currentuser;
+//   }
+////
+
+  Future<String> getCurrentUser() async {
+    String currentuser = "Me";
+    var current = "Me";
+    
+    final curr = "Me";
+    String cur = curr;
+
+
+    currentUser = currentuser;
+    print(currentUser);
+
+    // _emailController = currentuser;
+    // print(_emailController);
+
+    //return currentuser;
+    
+    //return current;
+    return cur;
+  }
+ 
+//   String? crrnt() async {
+//     final user = await getCurrentUser();
+//      print(user);
+//   }
+  
+
+
+  void _addSpecialization() async {
+
+  
+     print(_specialisationController.text.toString());
+        print(_key_wordsController.text.toString());
+        //print(_emailController.text.toString());
+
+        //String sth = "yerbaguy@gmail.com"; ok
+        
+        //   String sth1 = getcurrent(); // here ok
+
+
+            final sth1 = getCurrentUser1();
+
+
+         //  final sth1 = getcurrentUser();
+
+
+       
+        await specialisations.add({
+            'specialisation': _specialisationController.text.toString(),
+            'key_words': _key_wordsController.text.toString(),
+            // 'email': _emailController.text.toString(),
+            //'email_address': _emailController.text.toString(),
+            //   'email_address': sth //ok
+            'email_address': sth1
+           // 'email_address': getcurrentUser()
+            //'email_address': getCurrentUser()
+
+        });
+
+    }
+
+
+  @override
+  Widget build(BuildContext context) {
+
+     return new Scaffold(
+        // body: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+
+        // )
+
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+                Container(
+                    padding: EdgeInsets.fromLTRB(15,110,0,0),
+                        child: Text("SignUp",
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.bold
+                        )),
+                ),
+
+
+
+                Container(
+                        padding: EdgeInsets.only(top:35, left:20, right: 30),
+                        child: Column(
+                            children: <Widget>[
+                                TextField(
+                                    controller: _specialisationController,
+                                    decoration: InputDecoration(
+                                        labelText: 'Email',
+                                        labelStyle: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey,
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.green),
+                                        )
+                                    ),
+                                ),
+
+                                SizedBox(height:20,),
+
+                                TextField(
+                                    controller: _key_wordsController,
+                                    decoration: InputDecoration(
+                                        labelText: 'Password',
+                                        labelStyle: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey,
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.green),
+                                        )
+                                    ),
+                                   // obscureText: true,
+                                ),
+
+                                 SizedBox(height:5.0,),
+
+                                //  Container(
+                                //     alignment: Alignment(1,0),
+                                //     padding: EdgeInsets.only(top:15, left:20),
+                                //     child: InkWell(
+                                //         child: Text(
+                                //             'Forgot Password',
+                                //             style: TextStyle(
+                                //                 color: Colors.black,
+                                //                 fontWeight: FontWeight.bold,
+                                //                 fontFamily: 'Montserrat',
+                                //                 decoration: TextDecoration.underline,
+                                //             ),
+                                //         ),
+
+                                //     ),
+                                //  ),
+
+                                 SizedBox(height: 40,),
+                                 Container(
+                                    height: 40,
+                                    child: Material(
+                                        borderRadius: BorderRadius.circular(20),
+                                        shadowColor: Colors.greenAccent,
+                                        color: Colors.black,
+                                        elevation: 7,
+                                        child: GestureDetector(
+                                            onTap: (){
+
+                                              //  _register();
+
+                                            //   print("lkajsdlkfj");
+                                            //   print(getCurrentUser); ok
+                                             
+                                             
+                                              _addSpecialization();
+                                              getcurrentUser();
+
+                                              String str = getcurrent();
+                                              print(str);
+
+                                              //final cuser = getcurrentUser();//
+
+
+                                              //print(getCurrentUser1());
+                                             
+                                             //// final str1 = getCurrentUser1(); //no
+
+
+
+                                              databaseReference.child("lkajsd").set({
+                                                'specialisation':'heart',
+                                                'key_words':'heart problems',
+                                                'id': 'lkajs',
+
+                                              });
+                                              //////////////////print(str1);
+                                              
+                                              
+                                              //print(str1);
+                                             // print("lkajsd"+cuser);
+                                              
+
+                                             //// print(crrnt());
+                                              // getCurrentUser();
+                                            },
+                                            child: Center(
+                                                child: Text(
+                                                    'Register',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontFamily: 'Montserrat',
+                                                    ),
+                                                ),
+                                            ),
+
+                                        ),
+                                    ),
+                                 ),
+
+                                 SizedBox(height: 15,),
+                                 Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                        InkWell(
+                                            onTap: () {
+                                                // Navigator.of(context).pushNamed('/signup');
+                                                 Navigator.of(context).pop();
+                                            },
+                                                child: Text(
+                                                    'back to Login',
+                                                    style: TextStyle(
+                                                        color: Colors.blueGrey,
+                                                        fontFamily: 'Montserrat',
+                                                        fontWeight: FontWeight.bold,
+                                                        decoration: TextDecoration.underline,
+                                                    )
+                                                )
+                                            
+                                        ),
+                                    ]
+                                 ),
+
+
+
+
+                            ],
+                        ),
+                    ),
+            ]
+
+        )
+
+
+
+        
+
+       
+
+    );
+  
+  
+  
+  
+    // return Container(
+      
+    // );
+  }
+}
